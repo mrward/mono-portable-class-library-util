@@ -42,7 +42,7 @@ namespace NuGet
             return String.Empty;
         }
 
-        string[] GetPossibleMonoNetPortablePaths()
+        public string[] GetPossibleMonoNetPortablePaths()
         {
             string[] paths = GetPossibleXBuildFrameworkPaths();
 
