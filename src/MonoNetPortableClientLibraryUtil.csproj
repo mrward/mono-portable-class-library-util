@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{BAFBC66F-FC87-4176-9DAB-C14F02B893F0}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MonoNetPortable</RootNamespace>
+    <AssemblyName>MonoNetPortableClientLibraryUtil</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>True</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="CommonResources.cs">
+      <DependentUpon>CommonResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonResources.Designer.cs">
+      <DependentUpon>CommonResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="EnvironmentUtility.cs" />
+    <Compile Include="FrameworkNameEqualityComparer.cs" />
+    <Compile Include="IFileConflictResolver.cs" />
+    <Compile Include="IFileSystem.cs" />
+    <Compile Include="IFrameworkTargetable.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="IVersionSpec.cs" />
+    <Compile Include="MessageLevel.cs" />
+    <Compile Include="MonoNetPortableProfilePathResolver.cs" />
+    <Compile Include="NetPortableProfile.cs" />
+    <Compile Include="NetPortableProfileCollection.cs" />
+    <Compile Include="NetPortableProfileTable.cs" />
+    <Compile Include="NuGetResources.Designer.cs">
+      <DependentUpon>NuGetResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyHashSet.cs" />
+    <Compile Include="SemanticTypeConverter.cs" />
+    <Compile Include="SemanticVersion.cs" />
+    <Compile Include="VersionSpec.cs" />
+    <Compile Include="VersionUtility.cs" />
+    <Compile Include="XElementExtension.cs" />
+    <Compile Include="XmlUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonResources.resx">
+      <LogicalName>NuGet.CommonResources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuGetResources.resx">
+      <LogicalName>NuGet.Resources.NuGetResources.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
