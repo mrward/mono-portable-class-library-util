@@ -18,7 +18,6 @@ namespace NuGet
         // "custom profile string" version (i.e. "net40-client"), we need an alternate index
         // by this key. I used dictionary here since I saw no value in creating a custom collection 
         // like it's done already for the _portableProfiles. Not sure why it's done that way there.
-        private static IDictionary<string, NetPortableProfile> _portableProfilesByCustomProfileString;
 
         public static NetPortableProfile GetProfile(string profileName)
         {
@@ -37,7 +36,6 @@ namespace NuGet
             // If we didn't get a profile by the simple profile name, try now with 
             // the custom profile string (i.e. "net40-client")
             NetPortableProfile result = null;
-            _portableProfilesByCustomProfileString.TryGetValue(profileName, out result);
 
             return result;
         }
@@ -60,7 +58,6 @@ namespace NuGet
             {
                 // This setter is only for Unit Tests.
                 _portableProfiles = value;
-                _portableProfilesByCustomProfileString = _portableProfiles.ToDictionary(x => x.CustomProfileString);
             }
         }
 
