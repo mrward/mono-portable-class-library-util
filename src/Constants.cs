@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -39,6 +39,9 @@ namespace NuGet
         public static readonly string BinDirectory = "bin";
         public static readonly string SettingsFileName = "NuGet.Config";
         public static readonly string PackageReferenceFile = "packages.config";
+
+        public static readonly string BeginIgnoreMarker = "NUGET: BEGIN LICENSE TEXT";
+        public static readonly string EndIgnoreMarker = "NUGET: END LICENSE TEXT";
 
         internal const string PackageRelationshipNamespace = "http://schemas.microsoft.com/packaging/2010/07/";
 
