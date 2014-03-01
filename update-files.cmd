@@ -35,3 +35,6 @@ copy %src%\Core\Utility\PathUtility.cs %dst%
 copy %src%\Core\Logging\NullLogger.cs %dst%
 copy %src%\Core\Utility\UriUtility.cs %dst%
 copy %src%\Core\Utility\PathValidator.cs %dst%
+copy %src%\Core\Packages\IPackageFile.cs %dst%
+copy %src%\Core\Extensions\FileSystemExtensions.cs %dst%
+copy %src%\Core\Extensions\StreamExtensions.cs %dst%

@@ -13,11 +13,16 @@ namespace NuGet
         IEnumerable<string> GetDirectories(string path);
         string GetFullPath(string path);
         void DeleteFile(string path);
+        void DeleteFiles(IEnumerable<IPackageFile> files, string rootDir);
+
         bool FileExists(string path);
         bool DirectoryExists(string path);
         void AddFile(string path, Stream stream);
         void AddFile(string path, Action<Stream> writeToStream);
+        void AddFiles(IEnumerable<IPackageFile> files, string rootDir);
+
         void MakeFileWritable(string path);
+        void MoveFile(string source, string destination);
         Stream CreateFile(string path);
         Stream OpenFile(string path);
         DateTimeOffset GetLastModified(string path);

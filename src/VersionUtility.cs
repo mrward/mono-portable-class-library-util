@@ -507,6 +507,11 @@ namespace NuGet
 
         public static string GetShortFrameworkName(FrameworkName frameworkName)
         {
+            if (frameworkName == null)
+            {
+                throw new ArgumentNullException("frameworkName");
+            }
+
             // Do a reverse lookup in _frameworkNameAlias. This is so that we can produce the more user-friendly
             // "windowsphone" string, rather than "sl3-wp". The latter one is also prohibited in portable framework's profile string.
             foreach (KeyValuePair<FrameworkName, FrameworkName> pair in _frameworkNameAlias)
@@ -560,6 +565,11 @@ namespace NuGet
             }
 
             return name + "-" + profile;
+        }
+
+        public static string GetTargetFrameworkLogString(FrameworkName targetFramework)
+        {
+            return (targetFramework == null || targetFramework == VersionUtility.EmptyFramework) ? NuGetResources.Debug_TargetFrameworkInfo_NotFrameworkSpecific : String.Empty;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]

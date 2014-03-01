@@ -57,12 +57,14 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="FileConflictResolution.cs" />
+    <Compile Include="FileSystemExtensions.cs" />
     <Compile Include="FrameworkNameEqualityComparer.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="IFileConflictResolver.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IFrameworkTargetable.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="IPackageFile.cs" />
     <Compile Include="IVersionSpec.cs" />
     <Compile Include="MessageLevel.cs" />
     <Compile Include="MonoNetPortableProfilePathResolver.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="ReadOnlyHashSet.cs" />
     <Compile Include="SemanticVersion.cs" />
     <Compile Include="SemanticVersionTypeConverter.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="UriUtility.cs" />
     <Compile Include="VersionSpec.cs" />
     <Compile Include="VersionUtility.cs" />
