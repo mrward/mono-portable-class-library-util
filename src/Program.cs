@@ -2,8 +2,10 @@
 // This code is distributed under the GNU LGPL (for details please see \doc\license.txt)
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 
 using NuGet;
 
@@ -13,13 +15,27 @@ namespace MonoNetPortable
 	{
 		public static void Main(string[] args)
 		{
-			var program = new Program();
-			program.Run();
+			try {
+				var program = new Program();
+				program.Run(args);
+			} catch (Exception ex) {
+				Console.WriteLine(ex.Message);
+			}
 		}
 		
-		void Run()
+		void Run(string[] args)
 		{
-			ShowProfiles();
+			var options = new Options();
+			if (!options.Parse(args)) {
+				options.ShowUsage();
+				return;
+			}
+			
+			if (options.ListProfiles) {
+				ShowProfiles();
+			} else if (options.FindCompatibileProfiles) {
+				FindCompatibleProfiles(options.TargetFramework);
+			}
 		}
 		
 		void ShowProfiles()
@@ -33,9 +49,19 @@ namespace MonoNetPortable
 			WriteLine();
 
 			WriteLine(".NETPortable profiles:");
-			foreach (var profile in NetPortableProfileTable.Profiles.OrderBy(OrderProfileByName)) {
-				WriteLine("{0} {1}", profile.Name, profile.CustomProfileString);
+			foreach (NetPortableProfile profile in GetAllProfiles()) {
+				WriteProfile(profile);
 			}
+		}
+		
+		void WriteProfile(NetPortableProfile profile)
+		{
+			WriteLine("{0} {1}", profile.Name, profile.CustomProfileString);
+		}
+		
+		IEnumerable<NetPortableProfile> GetAllProfiles()
+		{
+			return NetPortableProfileTable.Profiles.OrderBy(OrderProfileByName);
 		}
 		
 		void ShowUnixProfileLocation()
@@ -111,6 +137,25 @@ namespace MonoNetPortable
 		void WriteLine(string format, params object[] args)
 		{
 			Console.WriteLine(format, args);
+		}
+		
+		void FindCompatibleProfiles(string targetFramework)
+		{
+			FrameworkName framework = VersionUtility.ParseFrameworkName(targetFramework);
+			if (framework.IsPortableFramework()) {
+				NetPortableProfile portableProfile = NetPortableProfile.Parse(framework.Profile);
+				ShowCompatibleProfiles(profile => profile.IsCompatibleWith(portableProfile));
+			} else {
+				ShowCompatibleProfiles(profile => profile.IsCompatibleWith(framework));
+			}
+		}
+		
+		void ShowCompatibleProfiles(Func<NetPortableProfile, bool> isCompatible)
+		{
+			WriteLine("Compatible profiles:");
+			foreach (NetPortableProfile profile in GetAllProfiles().Where(isCompatible)) {
+				WriteProfile(profile);
+			}
 		}
 	}
 }
