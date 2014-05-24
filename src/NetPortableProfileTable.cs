@@ -160,7 +160,7 @@ namespace NuGet
             return profileCollection;
         }
         
-        static string GetPortableRootDirectory()
+        public static string GetPortableRootDirectory()
         {
             if (EnvironmentUtility.IsUnix)
             {
