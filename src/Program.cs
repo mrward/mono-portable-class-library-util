@@ -3,6 +3,8 @@
 
 using System;
 using System.IO;
+using System.Linq;
+
 using NuGet;
 
 namespace MonoNetPortable
@@ -31,7 +33,7 @@ namespace MonoNetPortable
 			WriteLine();
 
 			WriteLine(".NETPortable profiles:");
-			foreach (var profile in NetPortableProfileTable.Profiles) {
+			foreach (var profile in NetPortableProfileTable.Profiles.OrderBy(OrderProfileByName)) {
 				WriteLine("{0} {1}", profile.Name, profile.CustomProfileString);
 			}
 		}
@@ -53,6 +55,12 @@ namespace MonoNetPortable
 			
 			string directory = resolver.GetRootDirectory();
 			WriteNetPortableRootPath(directory);
+		}
+		
+		string OrderProfileByName(NetPortableProfile profile)
+		{
+			string number = profile.Name.ToLowerInvariant().Replace("profile", "");
+			return number.PadLeft(4, '0');
 		}
 		
 		static string AppendQuotesIfContainsSpaces(string directory)
