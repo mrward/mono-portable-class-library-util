@@ -184,7 +184,7 @@ namespace NuGet
                 {
                     return Enumerable.Empty<string>();
                 }
-                return Directory.GetFiles(path, filter, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                return Directory.EnumerateFiles(path, filter, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
                                 .Select(MakeRelativePath);
             }
             catch (UnauthorizedAccessException)
